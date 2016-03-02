@@ -4843,10 +4843,10 @@ body {
   background-image: url(images/info.png); }
 
 .social .fb {
-  background-image: url(/images/fb_share.png); }
+  background-image: url(images/fb_share.png); }
 
 .social .tw {
-  background-image: url(/images/twitter_share.png); }
+  background-image: url(images/twitter_share.png); }
 
 .image:hover {
   opacity: 0.8; }
