@@ -93,34 +93,26 @@ html(lang='en')
                 h1#totalMB 0
                 h2 Vaskat
                 h4#totalUsers 0
-                p
-                  | Med detta skulle man kunna ladda en iPhone
-                  strong#wattIphone
-                  |  gånger eller åka
-                  strong#wattCar
-                  |  km med en elbil.
+                p.
+                  Med detta skulle man kunna ladda en iPhone #[strong#wattIphone] gånger eller åka #[strong#wattCar] km med en elbil.
               .span4
                 h1#wattHour
                 h2 Wattimmar
-                p
-                  strong OBS:
-                  |  En MB motsvarar ca. 5.9 Wh, dock är detta ett "Worst-case scenario" där all utrustning, som servar och dylikt inte är optimerade för stromsnålt användande. Skulle man däremot använda sig utav
-                  a(href='http://en.wikipedia.org/wiki/Virtual_hosting_service', target='_blank') virtuella servar
-                  |  skulle förbrukningen kunna pressas ner till endast 1.9Wh!
-                p
-                  | Källor:
-                  a(href='http://www.androidauthority.com/iphone-5-vs-galaxy-s3-how-much-does-cost-charge-them-118866/', target='_blank') 1
-                  a(href='http://www.katescomment.com/energy-of-downloads/', target='_blank') 2
+                p.
+                  En MB motsvarar ca. 5.9 Wh, dock är detta ett "Worst-case scenario" där all utrustning, som servar och dylikt inte är optimerade för stromsnålt användande. Skulle man däremot använda sig utav
+                  #[a(href='http://en.wikipedia.org/wiki/Virtual_hosting_service', target='_blank') virtuella servar] skulle förbrukningen kunna pressas ner till endast 1.9Wh!
+                p.
+                  Källor: #[a(href='http://www.androidauthority.com/iphone-5-vs-galaxy-s3-how-much-does-cost-charge-them-118866/', target='_blank') 1]
+                  #[a(href='http://www.katescomment.com/energy-of-downloads/', target='_blank') 2]
               .span4
                 h1 Varför?
                 h2 Upplysning
-                p
-                  | Det började som ett internt skämt med en go göteborgare men jag insåg senare att det finns väldigt lite kunskap om datatrafikens miljöpåverkan.
-                p
-                  | Därför hoppas jag att denna sidan ska få dig att att inse att man faktiskt kan spara in på datatrafiken också!
-                p
-                  | Läs mer
-                  a(href='http://www.treehugger.com/gadgets/what-is-the-environmental-impact-of-the-internet.html', target='_blank') här
+                p.
+                  Det började som ett internt skämt med en go göteborgare men jag insåg senare att det finns väldigt lite kunskap om datatrafikens miljöpåverkan.
+                p.
+                  Därför hoppas jag att denna sidan ska få dig att att inse att man faktiskt kan spara in på datatrafiken också!
+                p.
+                  Läs mer #[a(href='http://www.treehugger.com/gadgets/what-is-the-environmental-impact-of-the-internet.html', target='_blank') här]
         audio#sound0(preload='none')
           source(src='sound/10.mp3', type='audio/mpeg')
           source(src='sound/10.ogg', type='application/ogg')
@@ -142,6 +134,12 @@ html(lang='en')
           })();
         footer.footer
           p
+            strong v 0.5
+            |  -
+            a(data-toggle='collapse', data-target='#v05') hostar på Github nu!
+            #v05.collapse.out
+              | Jag höll på att förlora domänen, jag hittade inte var jag hostade
+              |  projektet. Men nu har jag äntligen tagit tag i det.
             strong v 0.4
             |  -
             a(data-toggle='collapse', data-target='#v04') Info..
@@ -162,18 +160,10 @@ html(lang='en')
             | Hatbrev:
             a(href='#myModal', data-toggle='modal') #1
           p
-            strong Låtarna är lånade ifrån
-            a(href='http://www.youtube.com/watch?v=7hcXKjaR40c') Håkan Hellström
-            | ,
-            a(href='http://www.youtube.com/watch?v=eJoMrFiETUc') Bröderna Djup
-            |  och
-            a(href='http://www.youtube.com/watch?v=4tpeBCBtoZU') keosni391
-            | .
-            br
             strong Bugg?
             |  Kontakta gärna mig och påpeka den så ska jag försöka fixa det!
           p
-            | © 2013 Piérre Reimertz ·
+            | © 2016 Piérre Reimertz ·
             a(href='mailto:pierre@pierrereimertz.com?subject=Vasktrafik.se') Kontakta mig
       #myModal.modal.hide.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
         .modal-header

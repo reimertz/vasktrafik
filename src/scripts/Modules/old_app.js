@@ -1,7 +1,7 @@
 import $ from 'jquery';
 
-var DATA_URL = 'http://vaska.vasktrafik.se/data.json';
-var POST_URL = 'http://vaska.vasktrafik.se/post';
+var DATA_URL = 'https://hook.io/reimertz/vasktrafik/get';
+var POST_URL = 'https://hook.io/reimertz/vasktrafik/post';
 var TWITTER_API = 'http://cdn.api.twitter.com/1/urls/count.json';
 var FACEBOOK_API = 'http://graph.facebook.com/http://www.vasktrafik.se';
 var FACEBOOK_LIKE = "http://graph.facebook.com/632949043398485/";
@@ -105,17 +105,17 @@ var dataFetcher = (function() {
       });
     },
     updateData: function(data) {
-      var totalData = data.totalNrOfMB;
-      var totalUsers = data.totalUsers;
+      var totalData = data.data;
+      var totalUsers = data.nrOfUsers;
       if (totalData > 1000000) {
-        $("#totalMB").text(data.totalNrOfMB / 10000 + ' TB');
+        $("#totalMB").text(totalData / 10000 + ' TB');
       } else {
-        $("#totalMB").text(data.totalNrOfMB / 1000 + ' GB');
+        $("#totalMB").text(totalData / 1000 + ' GB');
       }
-      $("#totalUsers").text('av ' + data.totalUsers + ' användare');
-      $("#wattHour").text(((data.totalNrOfMB * 5.9) / 1000).toFixed(2) + ' kWh');
-      $("#wattIphone").text(((data.totalNrOfMB * 5.9) / 9.5).toFixed(0));
-      $("#wattCar").text(((data.totalNrOfMB * 5.9) / (300 * 1.6)).toFixed(1));
+      $("#totalUsers").text('av ' + totalUsers + ' användare');
+      $("#wattHour").text(((totalData * 5.9) / 1000).toFixed(2) + ' kWh');
+      $("#wattIphone").text(((totalData * 5.9) / 9.5).toFixed(0));
+      $("#wattCar").text(((totalData * 5.9) / (300 * 1.6)).toFixed(1));
     },
     start: function() {
       dataFetcher.fetchData();
@@ -251,16 +251,11 @@ var vaskController = (function() {
 var resultHandler = (function() {
   return {
     uploadResult: function(numOfMB) {
-      $.ajax({
-        type: "POST",
-        url: POST_URL,
-        data: {
-          mb: numOfMB
-        },
-        dataType: "json",
+      $.get({
+        url: POST_URL + '/' + numOfMB,
         success: function(data) {
-          alert(data);
-        },
+
+        }
       });
     }
   }
@@ -327,6 +322,7 @@ var imageDownloader = (function() {
   var targetMB = 0;
   var downloadedMB = 0;
   var startTime = 0;
+
   return {
     startLoop: function(url, imgSize, targetMB) {
       imageDownloader.run = true;
@@ -358,7 +354,7 @@ var imageDownloader = (function() {
               speed = null;
               time = null;
               sound = null;
-              data = null;
+
               imageDownloader.loop();
             } else {
               vaskController.finished();
