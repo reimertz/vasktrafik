@@ -1,16 +1,42 @@
 module['exports'] = function echoHttp (hook) {
-
   var store = hook.datastore,
         res = hook.res,
-        dataAmount = parseInt(hook.params.data);
+        method = hook.params.method,
+        data = parseInt(hook.params.data);
 
-  if (!dataAmount) return res.status(400).json({error:'missing data amount'});
-  if (data > 1000) return res.status(400).json({error:'invalid value'});
-  if (data < 10)    return res.status(400).json({error:'invalid value'});
+  function error() {
+    res.writeHead(400);
+    res.json({error:'invalid request'});
+  }
 
-  store.set('vaskTrafik', { dataAmount: dataAmount, nrOfUsers:1 }, function(err, result){
-    res.end(result);
-  });
+  if (!method) {
+    error();
+  }
+
+  else if(method === 'get') {
+    store.get('vaskTrafik', function(err, result){
+      res.json(result);
+    });
+  }
+
+  else if(method === 'post') {
+    if (!data || data > 1000 || data < 10){
+      error();
+    }
+    store.get('vaskTrafik', function(err, result){
+      if(err) error();
+
+      result.data += data;
+      result.nrOfUsers += 1;
+
+      store.set('vaskTrafik', result, function(err, status){
+        if(err) error();
+        res.json(result);
+      });
+    });
+  }
+
+  else error();
 }
 
 
